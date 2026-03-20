@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Săn Voucher Shopee 25%</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f4f4f4; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .card { background: white; border-radius: 15px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #ee4d2d; }
+        h2 { color: #ee4d2d; text-align: center; font-size: 20px; margin-bottom: 20px; }
+        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 15px; font-size: 14px; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; margin-bottom: 10px; transition: 0.2s; }
+        .btn-convert { background: #ee4d2d; color: white; }
+        .btn-copy { background: #27ae60; color: white; display: none; }
+        .result-box { display: none; border: 1px dashed #ee4d2d; padding: 15px; border-radius: 10px; margin-top: 15px; word-break: break-all; background: #fff5f1; font-size: 13px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Shopee Facebook Tool</h2>
+    <input type="text" id="linkInput" placeholder="Dán link sản phẩm Shopee...">
+    <button class="btn-convert" onclick="convert()">TẠO LINK GIẢM GIÁ 25%</button>
+    <div id="res" class="result-box"><strong>Link đã chuyển đổi:</strong><br><span id="out"></span></div>
+    <button id="cp" class="btn-copy" onclick="copy()">SAO CHÉP LINK</button>
+</div>
+<script>
+    function convert() {
+        const url = document.getElementById('linkInput').value.trim();
+        if(!url.includes('shopee.vn') && !url.includes('shp.ee')) return alert('Link không đúng!');
+        const final = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=17332200161&sub_id=FB_Voucher&deep_and_deferred=1`;
+        document.getElementById('out').innerText = final;
+        document.getElementById('res').style.display = 'block';
+        document.getElementById('cp').style.display = 'block';
+    }
+    function copy() {
+        navigator.clipboard.writeText(document.getElementById('out').innerText);
+        alert('Đã chép! Giờ hãy dán vào Facebook.');
+    }
+</script>
+</body>
+</html>
