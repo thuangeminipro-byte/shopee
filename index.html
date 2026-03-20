@@ -2,40 +2,136 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Săn Voucher Shopee 25%</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title id="pageTitle">Săn deal mã giảm giá Shopee - Thuận</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f4f4f4; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .card { background: white; border-radius: 15px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid #ee4d2d; }
-        h2 { color: #ee4d2d; text-align: center; font-size: 20px; margin-bottom: 20px; }
-        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 15px; font-size: 14px; }
-        button { width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; margin-bottom: 10px; transition: 0.2s; }
-        .btn-convert { background: #ee4d2d; color: white; }
-        .btn-copy { background: #27ae60; color: white; display: none; }
-        .result-box { display: none; border: 1px dashed #ee4d2d; padding: 15px; border-radius: 10px; margin-top: 15px; word-break: break-all; background: #fff5f1; font-size: 13px; line-height: 1.5; }
+        :root {
+            --primary: #ee4d2d;
+            --primary-dark: #d73211;
+            --bg: #f5f5f5;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 20px;
+            display: flex; justify-content: center;
+        }
+        .container {
+            width: 100%; max-width: 500px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-top: 6px solid var(--primary);
+        }
+        .header {
+            padding: 25px; text-align: center;
+            background: linear-gradient(to bottom, #fff1ed, #ffffff);
+        }
+        .header h1 { color: var(--primary); margin: 0; font-size: 22px; }
+        .header p { color: #666; margin-top: 10px; font-size: 14px; }
+        .content { padding: 20px; }
+        input {
+            width: 100%; padding: 15px;
+            border: 2px solid #eee; border-radius: 12px;
+            box-sizing: border-box; outline: none;
+            font-size: 15px; transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); }
+        .btn-primary {
+            width: 100%; background: var(--primary);
+            color: white; border: none;
+            padding: 15px; border-radius: 12px;
+            font-weight: bold; font-size: 16px;
+            margin-top: 15px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+        .result-card {
+            display: none; margin-top: 20px;
+            padding: 15px; background: #fff5f1;
+            border: 1px dashed var(--primary);
+            border-radius: 12px; word-break: break-all;
+        }
+        .result-card.show { display: block; animation: fadeIn 0.5s; }
+        .final-link { color: #333; font-size: 13px; display: block; margin-bottom: 10px; }
+        .btn-copy {
+            background: #2ecc71; color: white; border: none;
+            padding: 10px; border-radius: 8px;
+            width: 100%; cursor: pointer; font-weight: bold;
+        }
+        .footer {
+            text-align: center; padding: 20px;
+            font-size: 12px; color: #999;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-<div class="card">
-    <h2>Shopee Facebook Tool</h2>
-    <input type="text" id="linkInput" placeholder="Dán link sản phẩm Shopee...">
-    <button class="btn-convert" onclick="convert()">TẠO LINK GIẢM GIÁ 25%</button>
-    <div id="res" class="result-box"><strong>Link đã chuyển đổi:</strong><br><span id="out"></span></div>
-    <button id="cp" class="btn-copy" onclick="copy()">SAO CHÉP LINK</button>
+
+<div class="container">
+    <div class="header">
+        <h1 id="pageHeading">VOUCHER 25% FACEBOOK</h1>
+        <p>Chào mừng <strong>Thuận</strong> — Công cụ tạo link sạch</p>
+    </div>
+
+    <div class="content">
+        <input type="text" id="linkInput" placeholder="Dán link sản phẩm Shopee vào đây...">
+        <button class="btn-primary" onclick="processLink()">
+            <i class="fas fa-magic"></i> NHẬN MÃ GIẢM GIÁ
+        </button>
+
+        <div id="resultArea" class="result-card">
+            <span style="color: #ee4d2d; font-weight: bold; font-size: 12px;">LINK ĐÃ CHUYỂN ĐỔI:</span>
+            <span id="finalLink" class="final-link"></span>
+            <button class="btn-copy" onclick="copyLink()">
+                <i class="fas fa-copy"></i> SAO CHÉP LINK
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        ID Affiliate: 17332200161<br>
+        Hệ thống tự động chống lỗi "Oops"
+    </div>
 </div>
+
 <script>
-    function convert() {
-        const url = document.getElementById('linkInput').value.trim();
-        if(!url.includes('shopee.vn') && !url.includes('shp.ee')) return alert('Link không đúng!');
-        const final = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=17332200161&sub_id=FB_Voucher&deep_and_deferred=1`;
-        document.getElementById('out').innerText = final;
-        document.getElementById('res').style.display = 'block';
-        document.getElementById('cp').style.display = 'block';
+    function processLink() {
+        let rawUrl = document.getElementById('linkInput').value.trim();
+        if (!rawUrl) {
+            alert("Bạn hãy dán link Shopee vào nhé!");
+            return;
+        }
+
+        // Bước 1: Loại bỏ các mã theo dõi rác để tránh lỗi Oops
+        let cleanUrl = rawUrl.split('?')[0];
+
+        // Bước 2: Gắn ID của Thuận
+        const myId = "17332200161";
+        
+        // Bước 3: Tạo link cấu trúc an_redir chuẩn nhất hiện nay
+        const encoded = encodeURIComponent(cleanUrl);
+        const final = `https://s.shopee.vn/an_redir?origin_link=${encoded}&affiliate_id=${myId}&sub_id=FB_Voucher&deep_and_deferred=1`;
+
+        // Bước 4: Hiển thị
+        document.getElementById('finalLink').innerText = final;
+        document.getElementById('resultArea').classList.add('show');
     }
-    function copy() {
-        navigator.clipboard.writeText(document.getElementById('out').innerText);
-        alert('Đã chép! Giờ hãy dán vào Facebook.');
+
+    function copyLink() {
+        const text = document.getElementById('finalLink').innerText;
+        const elem = document.createElement('textarea');
+        elem.value = text;
+        document.body.appendChild(elem);
+        elem.select();
+        document.execCommand('copy');
+        document.body.removeChild(elem);
+        alert("Đã sao chép! Hãy dán vào Facebook để mã sáng lên.");
     }
 </script>
+
 </body>
 </html>
